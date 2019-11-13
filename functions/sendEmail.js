@@ -5,14 +5,22 @@ const mailgun = require('mailgun-js')({
 });
 
 exports.handler = function(event, context, callback) {
-  // TODO Email und Namen parsen
   const { recipient, name } = JSON.parse(event.body);
-
+  console.log(`Email ---> ${recipient}`);
+  console.log(`Name --> ${name}`);
+  // callback(null, {
+  //   statusCode: 200,
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'Access-Control-Allow-Origin': '*',
+  //   },
+  //   body: event.body,
+  // });
   mailgun
     .messages()
     .send({
       to: recipient,
-      from: 'my-function@netlify.com',
+      from: 'my-function@gmail.com',
       subject: 'Welcome to Netlify Functions!',
       text: `Hello ${name}, good to have you on board!`,
     })
